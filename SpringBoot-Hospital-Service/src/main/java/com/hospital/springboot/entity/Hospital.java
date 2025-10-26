@@ -7,86 +7,60 @@ import jakarta.persistence.*;
 public class Hospital {
 
 	@Id
-	@GeneratedValue(strategy=GenerationType.IDENTITY)
-	private long hospitalId;
-	
-	private String hospitalName;
-	private String hospitalEmail;
-	private String hospitalCity;
-	private String hospitalContact;
-	
-	
+	@GeneratedValue(strategy = GenerationType.IDENTITY)
+	private Long id;
+
+	private String name;
+	private String city;
+	private int noOfBeds;
+
 	public Hospital() {
 		super();
-		// TODO Auto-generated constructor stub
 	}
 
-
-	public Hospital(String hospitalName, String hospitalEmail, String hospitalCity,
-			String hospitalContact) {
+	public Hospital(Long id, String name, String city, int noOfBeds) {
 		super();
-		this.hospitalName = hospitalName;
-		this.hospitalEmail = hospitalEmail;
-		this.hospitalCity = hospitalCity;
-		this.hospitalContact = hospitalContact;
+		this.id = id;
+		this.name = name;
+		this.city = city;
+		this.noOfBeds = noOfBeds;
 	}
 
-
-	public long getHospitalId() {
-		return hospitalId;
+	public Long getId() {
+		return id;
 	}
 
-
-	public void setHospitalId(long hospitalId) {
-		this.hospitalId = hospitalId;
+	public void setId(Long id) {
+		this.id = id;
 	}
 
-
-	public String getHospitalName() {
-		return hospitalName;
+	public String getName() {
+		return name;
 	}
 
-
-	public void setHospitalName(String hospitalName) {
-		this.hospitalName = hospitalName;
+	public void setName(String name) {
+		this.name = name;
 	}
 
-
-	public String getHospitalEmail() {
-		return hospitalEmail;
+	public String getCity() {
+		return city;
 	}
 
-
-	public void setHospitalEmail(String hospitalEmail) {
-		this.hospitalEmail = hospitalEmail;
+	public void setCity(String city) {
+		this.city = city;
 	}
 
-
-	public String getHospitalCity() {
-		return hospitalCity;
+	public int getNoOfBeds() {
+		return noOfBeds;
 	}
 
-
-	public void setHospitalCity(String hospitalCity) {
-		this.hospitalCity = hospitalCity;
+	public void setNoOfBeds(int noOfBeds) {
+		this.noOfBeds = noOfBeds;
 	}
-
-
-	public String getHospitalContact() {
-		return hospitalContact;
-	}
-
-
-	public void setHospitalContact(String hospitalContact) {
-		this.hospitalContact = hospitalContact;
-	}
-
 
 	@Override
 	public String toString() {
-		return "Hospital [hospitalId=" + hospitalId + ", hospitalName=" + hospitalName + ", hospitalEmail="
-				+ hospitalEmail + ", hospitalCity=" + hospitalCity + ", hospitalContact=" + hospitalContact + "]";
+		return "Hospital [id=" + id + ", name=" + name + ", city=" + city + ", noOfBeds=" + noOfBeds + "]";
 	}
-	
-	
+
 }
