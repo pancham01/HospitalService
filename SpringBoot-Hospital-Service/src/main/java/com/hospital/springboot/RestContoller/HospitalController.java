@@ -14,38 +14,46 @@ import org.springframework.web.client.RestTemplate;
 import com.hospital.springboot.dto.HospitalResponse;
 import com.hospital.springboot.dto.Patient;
 import com.hospital.springboot.entity.Hospital;
+import com.hospital.springboot.external.service.PatientService;
 import com.hospital.springboot.repository.HospitalRepository;
 
 @RestController
 @RequestMapping("/hospitals")
 public class HospitalController {
 
-    @Autowired
-    private HospitalRepository hospitalRepository;
+	@Autowired
+	private HospitalRepository hospitalRepository;
 
-    @Autowired
-    private RestTemplate restTemplate;
+	@Autowired
+	private RestTemplate restTemplate;
 
-    @PostMapping
-    public Hospital saveHospital(@RequestBody Hospital hospital) {
-        return hospitalRepository.save(hospital);
-    }
+	@Autowired
+	public PatientService patientService;
+	
+	@PostMapping
+	public Hospital saveHospital(@RequestBody Hospital hospital) {
+		return hospitalRepository.save(hospital);
+	}
 
-    @GetMapping
-    public List<Hospital> getAllHospitals() {
-        return hospitalRepository.findAll();
-    }
+	@GetMapping
+	public List<Hospital> getAllHospitals() {
+		return hospitalRepository.findAll();
+	}
 
-    // This endpoint calls Patient Service using RestTemplate
-    @GetMapping("/{hospitalId}/patient/{patientId}")
-    public HospitalResponse getHospitalWithPatient(@PathVariable(name = "hospitalId") Long hospitalId, @PathVariable(name = "patientId")  Long patientId) {
-        Hospital hospital = hospitalRepository.findById(hospitalId).orElse(null);
-        if (hospital == null) return new HospitalResponse(null, null);
+	// This endpoint calls Patient Service using RestTemplate
+	@GetMapping("/{hospitalId}/patient/{patientId}")
+	public HospitalResponse getHospitalWithPatient(@PathVariable(name = "hospitalId") Long hospitalId,
+			@PathVariable(name = "patientId") int patientId) {
+		Hospital hospital = hospitalRepository.findById(hospitalId).orElse(null);
+		if (hospital == null)
+			return new HospitalResponse(null, null);
 
-        String url = "http://PATIENT-SERVICE/patients/" + patientId;
-        Patient patient = restTemplate.getForObject(url, Patient.class);
+//        String url = "http://PATIENT-SERVICE/patients/" + patientId;
+//        Patient patient = restTemplate.getForObject(url, Patient.class);
 
-        return new HospitalResponse(hospital, patient);
-    }
+		Patient patient = patientService.getPatient(patientId);
+		
+		
+		return new HospitalResponse(hospital, patient);
+	}
 }
-
