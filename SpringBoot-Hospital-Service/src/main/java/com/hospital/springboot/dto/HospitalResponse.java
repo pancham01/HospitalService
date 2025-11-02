@@ -3,6 +3,7 @@ package com.hospital.springboot.dto;
 import com.hospital.springboot.entity.Hospital;
 
 public class HospitalResponse {
+	
 	private Hospital hospital;
 	private Patient patient;
 
