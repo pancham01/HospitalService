@@ -42,7 +42,7 @@ public class HospitalController {
         Hospital hospital = hospitalRepository.findById(hospitalId).orElse(null);
         if (hospital == null) return new HospitalResponse(null, null);
 
-        String url = "http://localhost:8081/patients/" + patientId;
+        String url = "http://PATIENT-SERVICE/patients/" + patientId;
         Patient patient = restTemplate.getForObject(url, Patient.class);
 
         return new HospitalResponse(hospital, patient);
