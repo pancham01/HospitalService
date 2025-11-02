@@ -18,7 +18,6 @@ public class HospitalMySqlDataIntegration {
 		SpringApplication.run(HospitalMySqlDataIntegration.class, args);
 	}
 	
-	
 	@Bean
 	@LoadBalanced
     public RestTemplate restTemplate() {
